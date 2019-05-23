@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.arbol;
 
 /**
@@ -41,51 +37,43 @@ public class Arbol {
         return true;
     }
     
-    
-    //funcion qeu imprime por consola toda la informacion contenida en el arbol.
-    public void imprimir(Nodo nodo){
-        if(nodo == null)
-            return;
-        System.out.println(nodo.getId());
-        imprimir(nodo.getHijIzq());
-        imprimir(nodo.getHijDer());
-    }
-    
     // metodo que calcula la altura de un nodo
     public int getAlturaNodo(Nodo nodo){
         if(nodo == null)
             return 0;
-        else if (getAlturaNodo(nodo.getHijDer()) > getAlturaNodo(nodo.getHijIzq()))
-            return 1 + getAlturaNodo(nodo.getHijDer());
+        else if (getAlturaNodo(nodo.getHijDer()) > getAlturaNodo(nodo.getHijIzq())) //se busca la rama mas larga del arbol
+            return 1 + getAlturaNodo(nodo.getHijDer()); // se suma el numero de hojas de la rama
         else
-            return 1 + getAlturaNodo(nodo.getHijIzq());
+            return 1 + getAlturaNodo(nodo.getHijIzq()); //se suma el numero de hojas de la rama
     }
     
     //metodo para calcular el factor de equlibrio
     public int getFactorEquilibrio(Nodo nodo){
-        if(nodo == null)
+        if(nodo == null) //en caso de se llegue al ultimo nodo
             return 0;
         else
-            return(getAlturaNodo(nodo.getHijIzq()) - getAlturaNodo(nodo.getHijDer())); 
+            //para calcular la se resta la actura del subarbo izquierdo cib el sub arbol derecho
+            return(getAlturaNodo(nodo.getHijIzq()) - getAlturaNodo(nodo.getHijDer()));  
     }
     
+    /*******************metodo para valanciar el arbol**************************/
     public void valancearArbol(Nodo nodo, Nodo padre, boolean isHI){
         if(nodo == null)
             return;
-        int factorEquilibrio = getFactorEquilibrio(nodo);
+        int factorEquilibrio = getFactorEquilibrio(nodo); // calcula el factor de equlibrio del nodo actual
         
-        if(factorEquilibrio < -1 ){
-            if(nodo.getHijDer().getHijDer() != null){
-                if(padre == null)
+        if(factorEquilibrio < -1 ){ // verifica si esta desequlibrado por el lado derecho
+            if(nodo.getHijDer().getHijDer() != null){ //se hace la rotacion simpe derecha
+                if(padre == null) // en caso de qu el nodo des quilibrado sea  la raiz 
                     raiz = equilibrarDD(nodo);
-                else if(isHI){
+                else if(isHI){ // verifica de que lado insertar el nuevo sub arbol
                     padre.setHijIzq(equilibrarDD(nodo));
                 }
                 else{
                     padre.setHijDer(equilibrarDD(nodo));
                 }
             }
-            else{
+            else{   //se hace la rotacion Derecha Izquierda
                 if(padre == null)
                     raiz = equilibrarDI(nodo);
                 else if(isHI){
@@ -96,8 +84,8 @@ public class Arbol {
                 }
             }
         }
-        else if(factorEquilibrio > 1){
-            if(nodo.getHijIzq().getHijIzq() != null){
+        else if(factorEquilibrio > 1){ // verifica si esta desequilibrado por el lado Izquierdo
+            if(nodo.getHijIzq().getHijIzq() != null){ //se hace la rotacon simple izquierda
                 if(padre == null)
                     raiz = equilibrarII(nodo);
                 else if(isHI)
@@ -105,7 +93,7 @@ public class Arbol {
                 else
                     padre.setHijDer(equilibrarII(nodo));
             }
-            else{
+            else{ // se hace la rotacion Izquiesda Derecha
                 if(padre == null)
                     raiz = equilibrarID(nodo);
                 else if(isHI)
@@ -117,7 +105,10 @@ public class Arbol {
         valancearArbol(nodo.getHijIzq(),nodo, true);
         valancearArbol(nodo.getHijDer(), nodo, false);
     }
-    
+    /*************************Fin del metodo************************************/
+   
+    /********************Metodos para hacer la rotaciones***********************/
+     
     public Nodo equilibrarDD(Nodo n){
         Nodo n1 = n.getHijDer();
         n.setHijDer(n1.getHijIzq()); 
@@ -149,4 +140,5 @@ public class Arbol {
         n2.setHijIzq(n);
         return n2;
     }
+    /**************************************************************************/
 }
