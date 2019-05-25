@@ -273,6 +273,20 @@ public class AdminReporte4505 {
         Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
         if(p == null) // en caso de que l pasiente aun no este registrado
             p = crearPaciente(datos);
-        
+        p.getDatos()[18] = "0";
+        p.getDatos()[64] = "1845-01-01";
+        p.getDatos()[65] = "1845-01-01";
+        p.getDatos()[73] = "999";
+        p.getDatos()[79] = "1800-01-01";
+        p.getDatos()[95] = "1800-01-01";
+        p.getDatos()[98] = "1800-01-01";
+        p.getDatos()[99] = "1800-01-01";
+        p.getDatos()[104] = "1800-01-01";
+        p.getDatos()[111] = "1800-01-01";
+        p.getDatos()[80] = "22";
+        p.getDatos()[90] = datos[8];
+        p.getDatos()[90] = datos[8];
+        p.getDatos()[91] = "130010033001";
     }
+    
 }
