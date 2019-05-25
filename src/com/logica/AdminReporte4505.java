@@ -233,7 +233,7 @@ public class AdminReporte4505 {
         p.getDatos()[93] = "0";
         p.getDatos()[94] = "0";
         p.getDatos()[96] = "0";
-        if(edad > 35){
+        if(edad < 35){
             p.getDatos()[97] = "0";
         }
         else{
@@ -309,6 +309,42 @@ public class AdminReporte4505 {
     }
     
     public void validarPacientePomeroy(String datos[]){
-        
+        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        if(p == null) // en caso de que l pasiente aun no este registrado
+            p = crearPaciente(datos);
+        p.getDatos()[53] = "13";
+        p.getDatos()[54] = datos[9];
+        p.getDatos()[14] =  p.getDatos()[19] =  p.getDatos()[20] = "3";
+        p.getDatos()[15] =  p.getDatos()[16] =  p.getDatos()[17] 
+                =  p.getDatos()[22] =  p.getDatos()[23] =  p.getDatos()[25] 
+                =  p.getDatos()[26] =  p.getDatos()[27] = "2";
+        p.getDatos()[18] = "0";
+        p.getDatos()[24] = "7";
+        p.getDatos()[64] = "1845-01-01";
+        p.getDatos()[65] = "1845-01-01";
+        p.getDatos()[66] = "1845-01-01";
+        p.getDatos()[67] = "1845-01-01";
+        p.getDatos()[102] = "1845-01-01";
+        p.getDatos()[102] = "4";
+    }
+    
+     public void validarPacienteJadel(String datos[]){
+        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        if(p == null) // en caso de que l pasiente aun no este registrado
+            p = crearPaciente(datos);
+        p.getDatos()[53] = "3";
+        p.getDatos()[54] = datos[9];
+        p.getDatos()[14] =  p.getDatos()[19] =  p.getDatos()[20] = "3";
+        p.getDatos()[15] =  p.getDatos()[16] =  p.getDatos()[17] 
+                =  p.getDatos()[22] =  p.getDatos()[23] =  p.getDatos()[25] 
+                =  p.getDatos()[26] =  p.getDatos()[27] = "2";
+        p.getDatos()[18] = "0";
+        p.getDatos()[24] = "7";
+        p.getDatos()[64] = "1845-01-01";
+        p.getDatos()[65] = "1845-01-01";
+        p.getDatos()[66] = "1845-01-01";
+        p.getDatos()[67] = "1845-01-01";
+        p.getDatos()[102] = "1845-01-01";
+        p.getDatos()[102] = "4";
     }
 }
