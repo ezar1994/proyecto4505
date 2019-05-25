@@ -37,6 +37,20 @@ public class Arbol {
         return true;
     }
     
+    // Metodo para buscar un nodo por su id
+    public Nodo buscarNodo(int id){
+        Nodo aux = raiz;
+        while(aux != null){
+            if(id < aux.getId())
+                aux = aux.getHijIzq();
+            else if(id > aux.getId())
+                aux = aux.getHijDer();
+            else if(id == aux.getId())
+                return aux;
+        }
+        return null;
+    }
+    
     // metodo que calcula la altura de un nodo
     public int getAlturaNodo(Nodo nodo){
         if(nodo == null)

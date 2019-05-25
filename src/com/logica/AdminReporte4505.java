@@ -103,24 +103,23 @@ public class AdminReporte4505 {
         p.getDatos()[27] = "21";
         p.getDatos()[28] = "1800-01-01";
         p.getDatos()[29] = "999";
-        p.getDatos()[30] = "999";
+        p.getDatos()[30] = "1800-01-01";
         p.getDatos()[31] = "999";
+        p.getDatos()[32] = "1845-01-01";
+
         if("M".equals(p.getDatos()[9] )){
-            p.getDatos()[32] = "1845-01-01";
             p.getDatos()[48] = "1845-01-01";
             p.getDatos()[49] = "1845-01-01";
-            p.getDatos()[50] = "1845-01-01";
             p.getDatos()[45] = "0";
             p.getDatos()[46] = "0";
         }
         else{
-            p.getDatos()[32] = "1800-01-01";
             p.getDatos()[48] = "1800-01-01";
             p.getDatos()[49] = "1800-01-01";
-            p.getDatos()[50] = "1800-01-01";
             p.getDatos()[45] = "22";
             p.getDatos()[46] = "22";
         }
+        p.getDatos()[50] = "1845-01-01";
         if(edad > 5)
             p.getDatos()[33] = "0";
         else
@@ -163,6 +162,7 @@ public class AdminReporte4505 {
         }
         p.getDatos()[51] = "1845-01-01";
         p.getDatos()[57] = "1845-01-01";
+        p.getDatos()[55] = "1845-01-01";
         p.getDatos()[56] = "0";
         p.getDatos()[58] = "0";
         p.getDatos()[59] = "0";
@@ -172,7 +172,7 @@ public class AdminReporte4505 {
             p.getDatos()[61] = "1845-01-01";
         else
             p.getDatos()[61] = "1800-01-01";
-        if(edad < 55)
+        if(edad < 55	)
             p.getDatos()[62] = "1845-01-01";
         else
             p.getDatos()[62] = "1800-01-01";
@@ -189,6 +189,7 @@ public class AdminReporte4505 {
         }
         else{
             p.getDatos()[68] = "1800-01-01";
+            p.getDatos()[69] = "1800-01-01";
             p.getDatos()[70] = "20";
         }
         if(edad < 10 || edad > 29)
@@ -201,17 +202,17 @@ public class AdminReporte4505 {
         else
             p.getDatos()[72] = "1800-01-01";
         p.getDatos()[73] = "0";
-        p.getDatos()[74] = "1800-01-01";
-        p.getDatos()[75] = "1800-01-01";
+        p.getDatos()[74] = "1845-01-01";
+        p.getDatos()[75] = "1845-01-01";
         p.getDatos()[76] = "0";
         p.getDatos()[78] = "0";
         p.getDatos()[77] = "1845-01-01";
         p.getDatos()[83] = "1845-01-01";
-        p.getDatos()[84] = "1845-01-01";
-        p.getDatos()[79] = "1800-01-01";
-        p.getDatos()[81] = "1800-01-01";
-        p.getDatos()[80] = "22";
-        p.getDatos()[82] = "22";
+        p.getDatos()[84] = "0";
+        p.getDatos()[79] = "1845-01-01";
+        p.getDatos()[81] = "1845-01-01";
+        p.getDatos()[80] = "0";
+        p.getDatos()[82] = "0";
         if("M".equals(p.getDatos()[9])){
             p.getDatos()[85] = "0";
             p.getDatos()[87] = "0";
@@ -220,7 +221,6 @@ public class AdminReporte4505 {
         }
         else{
             p.getDatos()[85] = "22";
-            p.getDatos()[112] = "22";
             p.getDatos()[87] = "999";
             p.getDatos()[88] = "999";
             p.getDatos()[86] = "1800-01-01";
@@ -250,20 +250,29 @@ public class AdminReporte4505 {
         p.getDatos()[114] = "0";
         p.getDatos()[115] = "0";
         p.getDatos()[116] = "0";
-        if(edad < 14 && edad > 9)
-            p.getDatos()[102] = "1800-01-01";
-        else
-            p.getDatos()[102] = "1845-01-01";
+        p.getDatos()[102] = "1800-01-01";
         p.getDatos()[104] = "1845-01-01";
         p.getDatos()[105] = "1845-01-01";
         p.getDatos()[107] = "1845-01-01";
         p.getDatos()[109] = "1845-01-01";
         p.getDatos()[110] = "1845-01-01";
         p.getDatos()[111] = "1845-01-01";
+        p.getDatos()[112] = "22";
+        p.getDatos()[113] = "0";
+        p.getDatos()[114] = "0";
+        p.getDatos()[115] = "0";
+        p.getDatos()[116] = "0";
         p.getDatos()[117] = "1845-01-01";
         
         arbolPacientes.insertarNodo(p);
         
         return p;
+    }
+    
+    public void insertarPacienteColposcopia(String datos[]){
+        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        if(p == null) // en caso de que l pasiente aun no este registrado
+            p = crearPaciente(datos);
+        
     }
 }
