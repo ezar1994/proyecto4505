@@ -269,7 +269,7 @@ public class AdminReporte4505 {
         return p;
     }
     
-    public void insertarPacienteColposcopia(String datos[]){
+    public void validarPacienteColposcopia(String datos[]){
         Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
         if(p == null) // en caso de que l pasiente aun no este registrado
             p = crearPaciente(datos);
@@ -285,8 +285,30 @@ public class AdminReporte4505 {
         p.getDatos()[111] = "1800-01-01";
         p.getDatos()[80] = "22";
         p.getDatos()[90] = datos[8];
-        p.getDatos()[90] = datos[8];
         p.getDatos()[91] = "130010033001";
     }
     
+    public void validarPacienteMamografia(String datos[]){
+        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        if(p == null) // en caso de que l pasiente aun no este registrado
+            p = crearPaciente(datos);
+        p.getDatos()[18] = "0";
+        p.getDatos()[79] = "1800-01-01";
+        p.getDatos()[81] = "1800-01-01";
+        p.getDatos()[92] = "1800-01-01";
+        p.getDatos()[104] = "1800-01-01";
+        p.getDatos()[80] = "22";
+        p.getDatos()[82] = "22";
+        p.getDatos()[91] = "999";
+        p.getDatos()[93] = "999";
+        p.getDatos()[94] = "999";
+        p.getDatos()[106] = "999";
+        p.getDatos()[102] = "1845-01-01";
+        p.getDatos()[95] = datos[9];
+        /*    ¡¡¡¡ IMPORTANTE CAMPO 96 POR EVALUAR BIEN   !!!      */
+    }
+    
+    public void validarPacientePomeroy(String datos[]){
+        
+    }
 }
