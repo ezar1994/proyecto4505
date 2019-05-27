@@ -11,6 +11,12 @@ public class Arbol {
     public Arbol() {
         raiz = null;
     }
+
+    public Nodo getRaiz() {
+        return raiz;
+    }
+    
+    
     // Metodo utilizado para la insercion de un nuevo nodo al arbol
     public boolean insertarNodo(Nodo nuevoNodo){    //resibe el nevo nodo para insertar
         if(raiz == null)    //en caso de que el arbol este vacio agrege el primer nodo.
@@ -20,15 +26,15 @@ public class Arbol {
             Nodo padre = null;  //Nodo que va a captar la direccion del Nodo padre del nuevo nodo.
             while(aux != null){ //se recorre el arbol para buscar una posicion donde guradar el nuvo Nodo
                 padre = aux;
-                if(nuevoNodo.getId() > aux.getId()) 
+                if(nuevoNodo.getId().compareTo(aux.getId()) > 0) 
                     aux = aux.getHijDer(); //se hace la busqueda por el lado izquierdo en caso de que el nuevo nodo sea menor
-                else if(nuevoNodo.getId() < aux.getId())
+                else if(nuevoNodo.getId().compareTo(aux.getId()) < 0)
                     aux = aux.getHijIzq(); //se hace la busqueda por el lado izquierdo en caso de que el nuevo nodo sea mayor
-                else if(aux.getId() == nuevoNodo.getId())
+                else if(aux.getId().equals(nuevoNodo.getId()))
                     return false;   //si encuentra un nodo igual se sale del metodo retorna false
             }
             nuevoNodo.setNodoPadre(padre);
-            if(nuevoNodo.getId() < padre.getId())
+            if(nuevoNodo.getId().compareTo(padre.getId()) < 0)
                 padre.setHijIzq(nuevoNodo); //se inserta el nodo en caso que sea menor que el padre
             else
                 padre.setHijDer(nuevoNodo); //se inserta el nodo en caso que sea mayor que el padre
@@ -37,15 +43,24 @@ public class Arbol {
         return true;
     }
     
+    public void imprimir(Nodo nodo){
+        if(nodo == null)
+            return;
+        
+        System.out.println(nodo.toString());
+        imprimir(nodo.getHijIzq());
+        imprimir(nodo.getHijDer());
+    }
+    
     // Metodo para buscar un nodo por su id
-    public Nodo buscarNodo(int id){
+    public Nodo buscarNodo(String id){
         Nodo aux = raiz;
         while(aux != null){
-            if(id < aux.getId())
-                aux = aux.getHijIzq();
-            else if(id > aux.getId())
-                aux = aux.getHijDer();
-            else if(id == aux.getId())
+            if(aux.getId().compareTo(id) > 0) 
+                    aux = aux.getHijDer(); //se hace la busqueda por el lado izquierdo en caso de que el nuevo nodo sea menor
+            else if(aux.getId().compareTo(id) < 0)
+                    aux = aux.getHijIzq(); //se hace la busqueda por el lado izquierdo en caso de que el nuevo nodo sea mayor
+            else if(aux.getId().equals(id))
                 return aux;
         }
         return null;

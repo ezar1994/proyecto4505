@@ -6,16 +6,18 @@
 package com.logica;
 
 import com.arbol.Arbol;
+import com.persistencia.ControlArchivos;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
  * @author Esteban Arteaga
  */
 public class AdminReporte4505 {
-    private Arbol arbolPacientes; //Arbol AVL con la informacion de los pacientes
+    private final Arbol arbolPacientes; //Arbol AVL con la informacion de los pacientes
     public static final int ARCHIVO_RUAF = 1,
                             ARCHIVO_LABORATORIO = 2,
                             ARCHIVO_POMEROY = 3,
@@ -28,6 +30,29 @@ public class AdminReporte4505 {
         arbolPacientes = new Arbol();
         consecutivo = 0;
     }
+
+    public Arbol getArbolPacientes() {
+        return arbolPacientes;
+    }
+
+    public int getConsecutivo() {
+        return consecutivo;
+    }
+    
+    public void registrarPacentes(int archivo, String ruta){
+        ArrayList<String[]> datos = ControlArchivos.leerArchivoJadel(ruta);
+        
+        switch(archivo){
+            case ARCHIVO_JADEL:{
+                for (String[] s : datos) {
+                    if(s[1] != null)
+                    validarPacienteJadel(s);
+                }
+                break;
+            }
+        }
+        //arbolPacientes.imprimir(arbolPacientes.getRaiz());
+    }
     
     private int calcularEdad(String fecha){
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -38,8 +63,8 @@ public class AdminReporte4505 {
         return periodo.getYears();
     }
     
-    public Paciente crearPaciente(String datos[]){
-        Paciente p = new Paciente(Integer.parseInt(datos[1]));
+    private Paciente crearPaciente(String datos[]){
+        Paciente p = new Paciente(datos[1]);
         int edad = calcularEdad(datos[6]);
         
         p.getDatos()[0] = String.valueOf(++ consecutivo);
@@ -270,7 +295,7 @@ public class AdminReporte4505 {
     }
     
     public void validarPacienteColposcopia(String datos[]){
-        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        Paciente p = (Paciente) arbolPacientes.buscarNodo((datos[1])); //se busca si el paciente ya esta en la lista
         if(p == null) // en caso de que l pasiente aun no este registrado
             p = crearPaciente(datos);
         p.getDatos()[18] = "0";
@@ -289,7 +314,7 @@ public class AdminReporte4505 {
     }
     
     public void validarPacienteMamografia(String datos[]){
-        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        Paciente p = (Paciente) arbolPacientes.buscarNodo((datos[1])); //se busca si el paciente ya esta en la lista
         if(p == null) // en caso de que l pasiente aun no este registrado
             p = crearPaciente(datos);
         p.getDatos()[18] = "0";
@@ -309,7 +334,7 @@ public class AdminReporte4505 {
     }
     
     public void validarPacientePomeroy(String datos[]){
-        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+        Paciente p = (Paciente) arbolPacientes.buscarNodo((datos[1])); //se busca si el paciente ya esta en la lista
         if(p == null) // en caso de que l pasiente aun no este registrado
             p = crearPaciente(datos);
         p.getDatos()[53] = "13";
@@ -328,8 +353,8 @@ public class AdminReporte4505 {
         p.getDatos()[102] = "4";
     }
     
-     public void validarPacienteJadel(String datos[]){
-        Paciente p = (Paciente) arbolPacientes.buscarNodo(Integer.parseInt(datos[1])); //se busca si el paciente ya esta en la lista
+    private void validarPacienteJadel(String datos[]){
+        Paciente p = (Paciente) arbolPacientes.buscarNodo((datos[1])); //se busca si el paciente ya esta en la lista
         if(p == null) // en caso de que l pasiente aun no este registrado
             p = crearPaciente(datos);
         p.getDatos()[53] = "3";

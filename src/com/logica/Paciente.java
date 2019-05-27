@@ -15,7 +15,7 @@ public class Paciente extends Nodo {
     
     private String[] datos;
 
-    public Paciente(int id) {
+    public Paciente(String id) {
         super(id);
         datos = new String[118];
     }
@@ -27,15 +27,9 @@ public class Paciente extends Nodo {
     public void setDatos(String[] datos) {
         this.datos = datos;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     
-    
+    public String toString(){
+        return datos[5] + " " + datos[6] + " " + datos[3] + " " +datos[4];
+    }
     
 }

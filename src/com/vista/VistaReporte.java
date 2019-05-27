@@ -5,9 +5,11 @@
  */
 package com.vista;
 
+import com.logica.AdminReporte4505;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
 /**
@@ -26,6 +28,8 @@ public class VistaReporte extends javax.swing.JFrame {
      * Creates new form VistaReporte
      */
     public VistaReporte() {
+        admin = new AdminReporte4505();
+        selectorArchivo = new JFileChooser();
         initComponents();
         setBounds(0,0,422,562);
         fondo.setBounds(0,0,getWidth(),getHeight());
@@ -50,7 +54,7 @@ public class VistaReporte extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtRUAF = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -86,6 +90,16 @@ public class VistaReporte extends javax.swing.JFrame {
         jButton7.setBounds(290, 390, 30, 20);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconfinder_View.png"))); // NOI18N
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5);
         jButton5.setBounds(290, 40, 30, 20);
 
@@ -106,13 +120,13 @@ public class VistaReporte extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(80, 20, 180, 17);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtRUAF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtRUAFActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(80, 40, 210, 20);
+        getContentPane().add(txtRUAF);
+        txtRUAF.setBounds(80, 40, 210, 20);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Subir Archivo de Mamografia");
@@ -180,15 +194,20 @@ public class VistaReporte extends javax.swing.JFrame {
         jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btn_generar_on.png"))); // NOI18N
         jButton1.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btn_generar_on.png"))); // NOI18N
         jButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btn_generar_on.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(120, 440, 140, 60);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtRUAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRUAFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtRUAFActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
@@ -197,6 +216,21 @@ public class VistaReporte extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        if(selectorArchivo.showDialog(this, "Abrir Archivo Excel") == JFileChooser.APPROVE_OPTION){
+            txtRUAF.setText(selectorArchivo.getSelectedFile().getAbsolutePath());
+        }
+    
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        admin.registrarPacentes(AdminReporte4505.ARCHIVO_JADEL, txtRUAF.getText());
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,7 +266,8 @@ public class VistaReporte extends javax.swing.JFrame {
             }
         });
     }
-
+    AdminReporte4505 admin;
+    JFileChooser selectorArchivo;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -250,7 +285,6 @@ public class VistaReporte extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -258,5 +292,6 @@ public class VistaReporte extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField txtRUAF;
     // End of variables declaration//GEN-END:variables
 }

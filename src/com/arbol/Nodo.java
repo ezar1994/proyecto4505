@@ -11,16 +11,16 @@ package com.arbol;
  */
 public abstract class Nodo {
     protected Nodo hijIzq, hijDer, NodoPadre;
-    protected int id;
+    protected String id;
 
-    public Nodo(Nodo hijIzq, Nodo hiDer, Nodo NodoPadre, int id) {
+    public Nodo(Nodo hijIzq, Nodo hiDer, Nodo NodoPadre, String id) {
         this.hijIzq = hijIzq;
         this.hijDer = hiDer;
         this.NodoPadre = NodoPadre;
         this.id = id;
     }
 
-    public Nodo(int id) {
+    public Nodo(String id) {
         this.id = id;
         hijDer = null;
         hijIzq = null;
@@ -51,11 +51,11 @@ public abstract class Nodo {
         this.NodoPadre = NodoPadre;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     
